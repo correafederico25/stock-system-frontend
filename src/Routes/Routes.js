@@ -1,7 +1,7 @@
 import React from 'react';
-import Login from '../Components/Login/Login';
+import Login from '../Pages/Login/Login';
 import PrivateRoute from '../Auth';
-import Dashboard from '../Components/Dashboard/Dashboard';
+import Dashboard from '../Pages/Dashboard/Dashboard';
 import {
     BrowserRouter as Router,
     Switch,
