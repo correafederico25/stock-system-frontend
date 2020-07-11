@@ -39,8 +39,8 @@ function Login(props) {
           if (resp.errorCode == 'MA099') {
             setErrorMsg(true)
           } else {
-            if (resp.token !== null & resp.auth !== false) {
-              localStorage.setItem("hasToken", JSON.stringify(resp.token));
+            if (resp.errorCode === 'MA0200') {
+              localStorage.setItem("hasToken", JSON.stringify(resp.authToken));
               setIsLogged(true)
               props.history.push("/dashboard")
             } else {
