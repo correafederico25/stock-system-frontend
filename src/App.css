@@ -1,6 +1,11 @@
 body {
-  font-size: 13.5px;
-  font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    font-family: "Nunito", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: left;
 }
 
 :root {
@@ -19,8 +24,29 @@ a {
   height: 100vh !important;
 }
 
-.bg-gradient {
-  background-image: linear-gradient(180deg,#4e73df 10%,#224abe 100%);
+.bg-sidebar {
+  background: #354052;
+}
+
+.sidebar-link {
+  padding: 0.7rem 1.5rem;
+}
+
+.sidebar-size {
+    min-width: 236px;
+    max-width: 236px;
+    transition: margin-left 0.35s ease-in-out, left 0.35s ease-in-out;
+    border-right: 0;
+}
+
+.header-sidebar {
+  font-weight: 600;
+  font-size: 1.15rem;
+  padding: 1.15rem 1.5rem;
+  color: #f8f9fa;
+  display: block;
+  width: 100%;
+
 }
 
 .siderbar {
@@ -160,6 +186,12 @@ background-image: linear-gradient(180deg,#4e73df 10%,#224abe 100%);
 }
 
 
+@media (max-width: 768px) { 
+
+  .hidden-sidebar{
+   margin-left: -236px !important;
+  }
+}
 
 
 @-webkit-keyframes load4 {

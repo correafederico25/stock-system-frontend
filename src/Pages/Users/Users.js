@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 
 
-function Users(props) {
-
+const Users = (props) => {
 
 const allUsers = Array.isArray(props.user) && props.user.map((item, i) => {
 

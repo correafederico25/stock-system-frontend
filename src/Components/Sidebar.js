@@ -26,15 +26,13 @@ const Sidebar = () => {
 
     return (
         <>
-            <nav className="navbar-nav full-height align-items-center p-2 text-center">
-                <div>
-                    <i class="fas fa-users-cog text-white icon-md"></i>
-                    <h5 className="sidebar text-white">Panel de control</h5>
+            <nav className="navbar-nav full-height align-items-center text-center">
+                <div className="header-sidebar">
+                    <h5 className="sidebar text-white">App Control</h5>
                 </div>
-                <hr className="sidebar-divider"></hr>
-                <div className="d-flex justify-content-between align-items-center w-100 cursor-pointer p-1" onClick={showSubmenu} >
+                <div className="d-flex justify-content-between align-items-center w-100 cursor-pointer sidebar-link" onClick={showSubmenu} >
                     <div className="d-flex align-items-center">
-                        <i class="far fa-folder-open icon-color text-white pr-2"></i>
+                        <i class="far fa-folder-open icon-color text-white pr-3"></i>
                         <a className="text-white pr-2">Productos</a>
                     </div>
                     <div>
@@ -42,7 +40,7 @@ const Sidebar = () => {
                     </div>
                 </div>
                 <div className={showOptions ? showDetail : hidden}>
-                    <div className="d-flex align-items-center  sidebar-font-color">
+                    <div className="d-flex align-items-center sidebar-font-color">
                         <i class="far fa-edit icon-xs"></i>
                         <Link className="m-2 d-block b-bottom cursor-pointer" to="/dashboard/products">Detalle de productos</Link>
                     </div>
@@ -59,10 +57,9 @@ const Sidebar = () => {
                         <Link className="m-2 d-block b-bottom cursor-pointer" to="/dashboard/delete-product">Borrar productos</Link>
                     </div>
                 </div>
-                <hr className="sidebar-divider"></hr>
-                <div className="d-flex justify-content-between align-items-center w-100 cursor-pointer p-1" onClick={showUserSubmenu}>
+                <div className="d-flex justify-content-between align-items-center w-100 cursor-pointer sidebar-link" onClick={showUserSubmenu}>
                     <div className="d-flex align-items-center">
-                        <i class="fas fa-user-friends text-white pr-2"></i>
+                        <i class="fas fa-user-friends text-white pr-3"></i>
                         <a className="text-white pr-2">Usuarios</a>
                     </div>
                     <div>
@@ -79,7 +76,6 @@ const Sidebar = () => {
                         <Link className="m-2 d-block b-bottom cursor-pointer" to="/dashboard/add-users">Agregar usuarios</Link>
                     </div>
                 </div>
-                <hr className="sidebar-divider"></hr>
             </nav>
         </>
     )

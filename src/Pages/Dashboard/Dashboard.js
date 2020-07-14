@@ -73,12 +73,17 @@ const Dashboard = (props) => {
   return (
     <React.Fragment>
       <Router>
-        <div className="container-fluid">
-          <div className="row">
-            <div className="d-none d-md-block col-md-3 col-lg-2 p-0 bg-gradient">
+        <div className="container-fluid p-0">
+          <div className="d-flex">
+
+  
+            <div className="p-0 bg-sidebar sidebar-size hidden-sidebar">
             <Sidebar></Sidebar>
             </div>
-            <div className="col-12 col-md-9 col-lg-10 p-0 bg-light">
+
+
+
+            <div className="w-100 p-0 bg-light">
            
             <Navbar userInfo={userInformation} logOut={logOut}></Navbar>
 
