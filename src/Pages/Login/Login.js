@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 
 
 
-function Login(props) {
+const Login = (props) => {
 
   const [inputs, setInputs] = useState({
     email: '',
@@ -12,18 +12,14 @@ function Login(props) {
   const [errorMsg, setErrorMsg] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
 
-
-
-
   const handleChange = e => {
     const { name, value } = e.target;
     setInputs(inputs => ({ ...inputs, [name]: value }));
   }
 
   const handleClickLogin = (e) => {
+
     e.preventDefault();
-
-
     const requestInfo = {
       method: 'POST',
       body: JSON.stringify(inputs),
@@ -52,16 +48,15 @@ function Login(props) {
           console.log(error)
         }
       )
-
   };
 
 
   return (
 
-    <React.Fragment>
-      <div className="container-fluid h-100 bg-gradient full-height">
+    <>
+      <div className="container-fluid h-100-white bg-gradient full-height">
         <div className="row justify-content-center align-items-center">
-          <div className="col-12 col-sm-8 col-md-7 col-lg-5 col-xl-4 mt-5 pt-4">
+          <div className="col-12 col-sm-8 col-md-7 col-lg-5 col-xl-4 mt-5 pt-4 z-index">
             <form className="text-center border border-light py-4 px-4 bg-white border-style">
               <p className="h4 mb-4">Iniciar sesión</p>
               {errorMsg ? <div class="alert alert-danger" role="alert">
@@ -86,6 +81,7 @@ function Login(props) {
                   <a href="">¿Olvidaste la clave? {props.title}</a>
                 </div>
               </div>
+              
               <button className="btn btn-info btn-block my-4 btn-app" onClick={handleClickLogin}>Ingresar</button>
               <p>Síguenos en las redes</p>
               <a href="#" className="mx-2" role="button"><i className="fab fa-facebook-f light-blue-text"></i></a>
@@ -95,8 +91,8 @@ function Login(props) {
             </form>
           </div>
         </div>
-      </div>
-    </React.Fragment>
+        </div>
+    </>
   )
 }
 
