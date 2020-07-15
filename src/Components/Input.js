@@ -4,21 +4,19 @@ const Input = (props) => {
 
 const handleChange = (e) => {
   props.handleChangeInput({
-    "asd" : e.target.value,
+    value : e.target.value,
     name : e.target.name
   });
 } 
     return (
         <>
         <div className="form-group mt-2">
-          <label className="text-white" htmlFor="">{props.textLabel}</label>
+          <label className="text-labels" htmlFor="">{props.textLabel}</label>
       {props.isSelectInput ? 
-            <select className="form-control" name="provider" value="" onChange={handleChange} >
+            <select className="form-control" name="role" onChange={handleChange} >
               <option default>Selecciona un proovedor</option>
-              <option value="proovedor 1">Proovedor 1</option>
-              <option value="proovedor 2">Proovedor 2</option>
-              <option value="proovedor 3">Proovedor 3</option>
-              <option value="proovedor 4">Proovedor 4</option>
+              <option value="ADMIN_ROLE">ADMIN</option>
+              <option value="EMPLOYEE_ROLE">EMPLOYEE</option>
             </select>
 
       :

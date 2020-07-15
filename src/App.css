@@ -47,7 +47,7 @@ a {
   font-weight: 600;
   font-size: 1.15rem;
   padding: 1.15rem 1.5rem;
-  color: #f8f9fa;
+  color: #EEF3F6;
   display: block;
   width: 100%;
 
@@ -261,11 +261,12 @@ background-image: linear-gradient(180deg,#4e73df 10%,#224abe 100%);
 }
 
 
-.background-colorSideBar{
-background-color: #354052
+.background-forms{
+background-color: #354052;
 }
-.text-white{
-color: white;
+.text-labels{
+font-size: 1rem;
+color: #ffffff;
 }
 
 .border-radius-20px{
