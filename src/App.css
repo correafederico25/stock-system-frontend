@@ -32,9 +32,13 @@ a {
   padding: 0.7rem 1.5rem;
 }
 
+.sidebar-link:hover{
+   background: #2d3646 !important;
+}
+
 .sidebar-size {
-    min-width: 236px;
-    max-width: 236px;
+    min-width: 260px;
+    max-width: 260px;
     transition: margin-left 0.35s ease-in-out, left 0.35s ease-in-out;
     border-right: 0;
 }
@@ -65,7 +69,6 @@ a {
   -webkit-box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.07);
   -moz-box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.07);
   box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.07);
-  border-radius: 5px;
 }
 
 .custom-form:focus {
@@ -114,6 +117,10 @@ a {
 
 .pr-align-sidebar {
   padding-right: 4px;
+}
+
+.p-2-rem {
+  padding-left: 3rem;
 }
 
 .sidebar-divider {
@@ -167,6 +174,10 @@ background-image: linear-gradient(180deg,#4e73df 10%,#224abe 100%);
     right: 16px;
 }
 
+.text-white {
+  color: rgba(255, 255, 255, 0.692) !important;
+}
+
 /* SPINNER - LOADING */
 
 .loader {
@@ -189,7 +200,7 @@ background-image: linear-gradient(180deg,#4e73df 10%,#224abe 100%);
 @media (max-width: 768px) { 
 
   .hidden-sidebar{
-   margin-left: -236px !important;
+   margin-left: -260px !important;
   }
 }
 
