@@ -1,10 +1,13 @@
 import React from 'react';
+import Layout from '../../Components/Layout';
 
 function DeleteArticle() {
     return (
+        <Layout>
         <div>
             <h1>Hello from delete products</h1>
         </div>
+        </Layout>
     )
 }
 

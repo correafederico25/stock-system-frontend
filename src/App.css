@@ -17,6 +17,13 @@
 body {
   font-size: 13.5px;
   font-family: 'product-sansregular', sans-serif;
+    margin: 0;
+    /* font-family: "Nunito", "Segoe UI", "Helvetica Neue", Arial, sans-serif; */
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    text-align: left;
 }
 
 :root {
@@ -35,8 +42,33 @@ a {
   height: 100vh !important;
 }
 
-.bg-gradient {
-  background-image: linear-gradient(180deg,#4e73df 10%,#224abe 100%);
+.bg-sidebar {
+  background: #354052;
+}
+
+.sidebar-link {
+  padding: 0.7rem 1.5rem;
+}
+
+.sidebar-link:hover{
+   background: #2d3646 !important;
+}
+
+.sidebar-size {
+    min-width: 260px;
+    max-width: 260px;
+    transition: margin-left 0.35s ease-in-out, left 0.35s ease-in-out;
+    border-right: 0;
+}
+
+.header-sidebar {
+  font-weight: 600;
+  font-size: 1.15rem;
+  padding: 1.15rem 1.5rem;
+  color: #EEF3F6;
+  display: block;
+  width: 100%;
+
 }
 
 .siderbar {
@@ -55,7 +87,6 @@ a {
   -webkit-box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.07);
   -moz-box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.07);
   box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.07);
-  border-radius: 5px;
 }
 
 .custom-form:focus {
@@ -104,6 +135,10 @@ a {
 
 .pr-align-sidebar {
   padding-right: 4px;
+}
+
+.p-2-rem {
+  padding-left: 3rem;
 }
 
 .sidebar-divider {
@@ -157,6 +192,10 @@ background-image: linear-gradient(180deg,#4e73df 10%,#224abe 100%);
     right: 16px;
 }
 
+.text-white {
+  color: rgba(255, 255, 255, 0.692) !important;
+}
+
 /* SPINNER - LOADING */
 
 .loader {
@@ -176,6 +215,12 @@ background-image: linear-gradient(180deg,#4e73df 10%,#224abe 100%);
 }
 
 
+@media (max-width: 768px) { 
+
+  .hidden-sidebar{
+   margin-left: -260px !important;
+  }
+}
 
 
 @-webkit-keyframes load4 {
@@ -233,4 +278,15 @@ background-image: linear-gradient(180deg,#4e73df 10%,#224abe 100%);
   }
 }
 
-  
+
+.background-forms{
+background-color: #354052;
+}
+.text-labels{
+font-size: 1rem;
+color: #ffffff;
+}
+
+.border-radius-20px{
+border-radius: 20px
+}
