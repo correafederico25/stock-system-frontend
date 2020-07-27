@@ -36,11 +36,11 @@ const Sidebar = () => {
           
                 <div className="d-flex justify-content-between align-items-center w-100 cursor-pointer sidebar-link" onClick={showSubmenu} >
                     <div className="d-flex align-items-center">
-                        <i class="far fa-folder-open icon-color text-white pr-3"></i>
+                        <i className="far fa-folder-open icon-color text-white pr-3"></i>
                         <a className="text-white pr-2">Productos</a>
                     </div>
                     <div>
-                        {showOptions ? <i class="fas fa-chevron-down text-white"></i> : <i class="fas fa-chevron-right ml-auto text-white"></i>}
+                        {showOptions ? <i className="fas fa-chevron-down text-white"></i> : <i className="fas fa-chevron-right ml-auto text-white"></i>}
                     </div>
                 </div>
                 <div className={showOptions ? showDetail : hidden}>
@@ -53,11 +53,11 @@ const Sidebar = () => {
                 </div>
                 <div className="d-flex justify-content-between align-items-center w-100 cursor-pointer sidebar-link" onClick={showUserSubmenu}>
                     <div className="d-flex align-items-center">
-                        <i class="fas fa-user-friends text-white pr-3"></i>
+                        <i className="fas fa-user-friends text-white pr-3"></i>
                         <a className="text-white pr-2">Usuarios</a>
                     </div>
                     <div>
-                        {showUsersOptions ? <i class="fas fa-chevron-down text-white"></i> : <i class="fas fa-chevron-right ml-auto text-white"></i>}
+                        {showUsersOptions ? <i className="fas fa-chevron-down text-white"></i> : <i className="fas fa-chevron-right ml-auto text-white"></i>}
                     </div>
                 </div>
                 <div className={showUsersOptions ? showDetail : hidden}>

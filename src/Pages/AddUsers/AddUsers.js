@@ -1,110 +1,176 @@
-import React from 'react';
-import Layout from '../../Components/Layout';
+import React, { useState } from 'react';
+import Layout from '../../Components/Layout/Layout';
 import Swal from 'sweetalert2';
-import Input from '../../Components/Input';
+import Input from '../../Components/Input/Input';
+import TitleDashboard from '../../Components/TitleDashoard/TitleDashboard';
+import Card from '../../Components/Card/Card';
+import Button from '../../Components/Button/Button';
+import Spinner from '../../Components/Spinner/Spinner';
 
-function AddUsers() {
-  var isNameValidEmployee = false;
-  var isLastNameValidEmployee = false;
-  var isDocumentNumberValidEmployee = false;
-  var isAgeValidEmployee = false;
-  var isIdValidEmployee = false;
-  //----------------------------------------------------REGISTER EMPLOYEE-----------------------------------------------------------------------------------------//
+const AddUsers = (props) => {
 
-//   const [isFormEmployeeValid, setisFormEmployeeValid] = React.useState(false);
-  
-//   const [classNameName, setClassNameName] = React.useState("form-control");
-//   const [classNameLastname, setClassNameLastname] = React.useState("form-control");
-//   const [classNameDocumentNumber, setClassNameDocumentNumber] = React.useState("form-control");
-//   const [classNameDateOfBirth, setClassNameDateOfBirth] = React.useState("form-control");
-//   const [classNameAge, setClassNameAge] = React.useState("form-control");
-//   const [classNameId, setClassNameId] = React.useState("form-control");
-  const [dataEmployee, setDataEmployee] = React.useState({
+
+  const options = [
+    {
+      label: 'Administrador',
+      value: 'ADMIN_ROLE'
+    },
+    {
+      label: 'Empleado',
+      value: 'USER_ROLE'
+    }
+  ]
+
+  const [dataEmployee, setDataEmployee] = useState({
     name: '',
     lastname: '',
-    documentNumber: '',
-    dateOfBirth: '',
-    age: '',
-    id: ''
-  })
+    dni: '',
+    email: '',
+    address: '',
+    dateOfAdmission: '',
+    phoneNumber: '',
+    password: '',
+    role: '',
+    state: "true",
+  });
+
+  const [repeatPassword, setRepeatPassword] = useState();
+  const [activeSpinner, setActiveSpinner] = useState(false);
 
 
-const onRegisterEmployee = () => {
-alert("ure")
-}
-    
-const handleChangeInput = (e) =>{
-      setDataEmployee({
-        ...dataEmployee,
-        [e.name]: e.asd
+  const onRegisterEmployee = (e) => {
+
+    e.preventDefault();
+  
+    setActiveSpinner(true);
+
+    if ( dataEmployee.name === "" || 
+         dataEmployee.lastname === "" ||
+         dataEmployee.dni === "" || 
+         dataEmployee.email === "" || 
+         dataEmployee.address === "" || 
+         dataEmployee.dateOfAdmission === "" || 
+         dataEmployee.phoneNumber === "" || 
+         dataEmployee.password === "" ||
+         dataEmployee.role === "" || 
+         dataEmployee.state === "" ) { 
+
+       Swal.fire({
+       icon: 'error',
+       title: '',
+       text: 'Por favor completa todos los datos para continuar',
+     })
+     setActiveSpinner(false);
+     return
+   }
+
+   if(dataEmployee.password !== repeatPassword ){
+    Swal.fire({
+      icon: 'error',
+      title: '',
+      text: 'Las contraseñas ingresada no coinciden',
+    });
+    setActiveSpinner(false);
+    return
+   }
+
+    const hasToken = JSON.parse(localStorage.getItem('hasToken'));
+
+      fetch("http://localhost:4000/auth/singup", {
+        method: 'POST',
+        body: JSON.stringify(dataEmployee),
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          'x-access-token': hasToken
+        }),
+      })
+        .then((resp) => resp.json())
+        .then((resp) => {
+          if(resp.errorCode === 'MA0200'){
+            setActiveSpinner(false);
+            Swal.fire({
+              icon: 'success',
+              title: resp.errorMsg,
+              showConfirmButton: false,
+              timer: 1500
+            });
+            return
+          }
+          setActiveSpinner(false);
+          Swal.fire({
+            icon: 'error',
+            title: '',
+            text: 'Es posible que alguno de los datos ingresados ya existan en el sistema',
+          })
+          return
+       
+        })
+  }
+
+  const handleChangeInput = (e) => {
+    setDataEmployee({
+      ...dataEmployee,
+      [e.name]: e.value
     })
-    console.log(dataEmployee)
-}
+  }
 
-    return (
-        <Layout>
-             <div className="container">
-          <div className="row d-flex justify-content-center">
+  const handleChangeRepeatPassword = (e) => {
+         setRepeatPassword(e.target.value);
+  }
 
-          </div>
-          <div className="row d-flex justify-content-center">
-            <div className="col-5 background-black border-radius-20px mr-4 ml-4">
-              <form>
-                <div className="row d-flex w-100 justify-content-center pt-4">
-                  <h4 className="color-white">REGISTRAR EMPLEADO</h4>
+  return (
+    
+    <Layout>
+      <form onSubmit={ onRegisterEmployee } noValidate>
+        <TitleDashboard title={'Agregar usuario'} icon={<i className="fas fa-user-plus"></i>} />
+        <div className="container-fluid">
+          <Card className="d-none d-md-block">
+            <div className="row">
+              <div className="col-md-6">
+                <Input textLabel={"Nombre"} isSelectInput={false} type={"text"} placeholder={"Ingresá el nombre"} name={"name"} handleChangeInput={handleChangeInput} />
+              </div>
+              <div className="col-md-6">
+                <Input textLabel={"Apellido"} isSelectInput={false} type={"text"} placeholder={"Ingresá el apellido"} name={"lastname"} handleChangeInput={handleChangeInput} />
+              </div>
+              <div className="col-md-6">
+                <Input textLabel={"DNI"} isSelectInput={false} type={"number"} placeholder={"Ingresá el DNI"} name={"dni"} handleChangeInput={handleChangeInput} />
+              </div>
+              <div className="col-md-6">
+                <Input textLabel={"Email"} isSelectInput={false} type={"text"} placeholder={"Ingresá el email"} name={"email"} handleChangeInput={handleChangeInput} />
+              </div>
+              <div className="col-md-6">
+                <Input textLabel={"Direccion"} isSelectInput={false} type={"text"} placeholder={"Ingresá la dirección"} name={"address"} handleChangeInput={handleChangeInput} />
+              </div>
+              <div className="col-md-6">
+                <Input textLabel={"Fecha de entrada"} isSelectInput={false} type={"date"} placeholder={"Elegí la fecha de entrada"} name={"dateOfAdmission"} handleChangeInput={handleChangeInput} />
+              </div>
+              <div className="col-md-6">
+                <Input textLabel={"Contraseña"} isSelectInput={false} type={"password"} placeholder={"Ingresá la contraseña"} name={"password"} handleChangeInput={handleChangeInput} />
+              </div>
+              <div className="col-md-6">
+                <div className="form-group mt-2">
+                <label className="text-labels" >Repetir contraseña</label>
+                <input  className="form-control" type="password" placeholder="ingresá nuevamente tu contraseña"  onChange={handleChangeRepeatPassword}/>
                 </div>
-                <Input textLabel={"Prueba"} type={"text"} placeholder={"Placeholder"} name={"name"} handleChangeInput={handleChangeInput}/>
-                <Input textLabel={"Prueba"} type={"date"} placeholder={"Placeholder"} name={"lastname"} handleChangeInput={handleChangeInput}/>
-                {/* <div className="form-group mt-2">
-                  <label htmlFor="exampleInputEmail1">Nombre</label>
-                  <input type="text" className={classNameName} placeholder="Ingresa tu nombre" value={dataEmployee.name} name="name" onChange={(e) => onChangeFormEmployee(e)} />
-                  <div className="invalid-feedback">
-                    Minimo 4 caracteres.
-                </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exampleInputPassword1">Apellido</label>
-                  <input type="text" className={classNameLastname} placeholder="Ingresa tu apellido" value={dataEmployee.lastname} name="lastname" onChange={(e) => { onChangeFormEmployee(e) }} />
-                  <div className="invalid-feedback">
-                    Minimo 4 caracteres.
-                </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exampleInputPassword1">DNI</label>
-                  <input type="number" className={classNameDocumentNumber} placeholder="Ingresa tu DNI" value={dataEmployee.documentNumber} name="documentNumber" onChange={(e) => onChangeFormEmployee(e)} />
-                  <div className="invalid-feedback">
-                    Ingrese un documento valido.
-                </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exampleInputPassword1">Fecha de nacimiento</label>
-                  <input type="date" className={classNameDateOfBirth} placeholder="Ingresa tu fecha de nacimiento" value={dataEmployee.dateOfBirth} name="dateOfBirth" onChange={(e) => onChangeFormEmployee(e)} />
-                  <div className="invalid-feedback">
-                    Ingrese su fecha de nacimiento.
-                </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exampleInputPassword1">Edad</label>
-                  <input type="number" className={classNameAge} placeholder="Ingresa tu edad" value={dataEmployee.age} name="age" onChange={(e) => onChangeFormEmployee(e)} />
-                  <div className="invalid-feedback">
-                    Ingrese una edad válida.
-                </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exampleInputPassword1">Id / cédula</label>
-                  <input type="number" className={classNameId} placeholder="Ingresa id/cédula" value={dataEmployee.id} name="id" onChange={(e) => onChangeFormEmployee(e)} />
-                  <div className="invalid-feedback">
-                    Ingrese una cédula.
-                </div>
-                </div> */}
-                <button type="button" className="btn btn-warning mt-3 mb-3" onClick={() => onRegisterEmployee()}>Registrar empleado</button>
-              </form>
+              </div>
+              <div className="col-md-6">
+                <Input textLabel={"Celular"} isSelectInput={false} type={"number"} placeholder={"Ingresá el numero de celular"} name={"phoneNumber"} handleChangeInput={handleChangeInput} />
+              </div>
+              <div className="col-md-6">
+                <Input textLabel={"Rol"} isSelectInput={true} placeholder={"Ingresá el rol"} name={"role"} options={options} handleChangeInput={handleChangeInput} />
+              </div>
             </div>
-
-          </div>
+            <div className="d-flex justify-content-center">
+                <Button isBlock={false}>
+                  {'Registrar usuario'}
+                </Button>
+              </div>
+          </Card>
         </div>
-        </Layout>
-    )
+        <Spinner isVisible={activeSpinner} />
+      </form>
+    </Layout>
+  )
 }
 
 export default AddUsers;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Sidebar from '../../Components/Sidebar';
-import Navbar from '../../Components/Navbar';
+import Sidebar from '../../Components/Sidebar/Sidebar';
+import Navbar from '../../Components/Navbar/Navbar';
 import Products from '../Products/Products';
 import AddProduct from '../AddProduct/AddProduct';
 import EditProducts from '../EditProducts/EditProducts';
@@ -15,7 +15,7 @@ import DeleteUsers from '../DeleteUsers/DeleteUsers';
 const Dashboard = (props) => {
   
   const [userInformation, setUserinformation] = useState({});
-  const [users, setUsers] = useState([])
+
 
   useEffect(() => {
 
@@ -44,20 +44,7 @@ const Dashboard = (props) => {
         }
       )
 
-    const requestAllUsers = {
-      method: 'GET',
-      headers: new Headers({
-        'Content-Type': 'application/json',
-        'x-access-token': hasToken
-      }),
-    };
-
-    fetch('http://localhost:4000/users/all', requestAllUsers)
-      .then(res => res.json())
-      .then(resp => {
-        setUsers(resp)
-      })
-  }, []);
+  },[]);
 
 
   const logOut = () => {
@@ -75,15 +62,15 @@ const Dashboard = (props) => {
             </div>
             <div className="w-100 p-0 bg-light">
             <Navbar userInfo={userInformation} logOut={logOut}></Navbar>
-              <div class="container-fluid full-height-sm">
-                <div class="row">
-                  <div class="col-12">
+              <div className="container-fluid full-height-sm">
+                <div className="row">
+                  <div className="col-12">
                     <Switch>
                       <Route path="/dashboard/add-users">
                         <AddUsers />
                       </Route>
                       <Route path="/dashboard/users">
-                        <Users user={users} />
+                        <Users  />
                       </Route>
                       <Route path="/dashboard/edit-user/:id">
                         <EditUsers />

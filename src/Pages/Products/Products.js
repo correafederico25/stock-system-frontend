@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from '../../Components/Layout';
+import Layout from '../../Components/Layout/Layout';
 
 function Articles() {
     return (
