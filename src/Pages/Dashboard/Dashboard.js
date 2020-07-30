@@ -9,8 +9,8 @@ import DeleteProduct from '../DeleteProduct/DeleteProduct';
 import Users from '../Users/Users';
 import AddUsers from '../AddUsers/AddUsers';
 import EditUsers from '../EditUsers/EditUsers';
-import DeleteUsers from '../DeleteUsers/DeleteUsers';
-
+import Home from '../Home/Home';
+import ProviderList from '../ProviderList/ProviderList';
 
 const Dashboard = (props) => {
   
@@ -75,9 +75,6 @@ const Dashboard = (props) => {
                       <Route path="/dashboard/edit-user/:id">
                         <EditUsers />
                       </Route>
-                      <Route path="/dashboard/delete-user/:id">
-                        <DeleteUsers />
-                      </Route>
                       <Route path="/dashboard/add-product">
                         <AddProduct />
                       </Route>
@@ -87,8 +84,14 @@ const Dashboard = (props) => {
                       <Route path="/dashboard/edit-products">
                         <EditProducts />
                       </Route>
-                      <Route path="/">
+                      <Route path="/dashboard/provider-list">
+                        <ProviderList />
+                      </Route>
+                      <Route path="/dashboard/products">
                         <Products />
+                      </Route>
+                      <Route path="/">
+                        <Home nameUser={userInformation.name} />
                       </Route>
                     </Switch>
                   </div>

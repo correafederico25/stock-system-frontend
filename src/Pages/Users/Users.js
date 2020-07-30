@@ -53,12 +53,12 @@ const Users = () => {
       .then(res => res.json())
       .then(resp => {
 
-        if(resp.errorCode){
+        if (resp.errorCode) {
 
           const deleteUser = users.filter(item => {
             return item._id !== id
           })
-         
+
           setUsers(deleteUser);
           setIsLoading(false);
 
@@ -68,8 +68,16 @@ const Users = () => {
             showConfirmButton: false,
             timer: 1500
           });
+          return
         }
-        
+
+        setIsLoading(false);
+        Swal.fire({
+          icon: 'error',
+          title: '',
+          text: resp.errorMsg
+        })
+        return
       });
   }
 
@@ -81,12 +89,13 @@ const Users = () => {
         <td>{item.lastname}</td>
         <td>{item.email}</td>
         <td>{item.phoneNumber}</td>
+        <td>{item.address}</td>
         <td>{item.role === 'ADMIN_ROLE' ? 'Administrador' : 'Empleado'}</td>
         <td>{FormatDate(item.dateOfAdmission)}</td>
         <td>
-          <Link className="pr-3" to={`/dashboard/edit-user/${item._id}`}><i className="fas fa-pen"></i></Link>
-          <a type="button" data-toggle="modal" data-target="#exampleModalCenter" onClick={ () => setUserId(item._id)}>
-            <i className="fas fa-trash"></i>
+          <Link className="pr-3" to={`/dashboard/edit-user/${item._id}`}><i className="fas fa-pen text-dark"></i></Link>
+          <a type="button" data-toggle="modal" data-target="#exampleModalCenter" onClick={() => setUserId(item._id)}>
+            <i className="fas fa-trash text-dark"></i>
           </a>
         </td>
       </tr>
@@ -110,6 +119,7 @@ const Users = () => {
                 <th scope="col">Apellido</th>
                 <th scope="col">Email</th>
                 <th scope="col">Contacto</th>
+                <th scope="col">Dirección</th>
                 <th scope="col">Rol</th>
                 <th scope="col">Fecha de ingreso</th>
                 <th scope="col">Acciones</th>
@@ -134,10 +144,10 @@ const Users = () => {
                 </div>
                 <div class="modal-body text-center">
                   <p className="lead">¿Estas seguro que querés eliminar este usuario?</p>
-              </div>
+                </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-primary btn-app btn-width" data-dismiss="modal">Cerrar</button>
-                  <button type="button" class="btn btn-primary btn-app btn-width" data-dismiss="modal" onClick={ () => deleteUser(userId) }>Confirmar</button>
+                  <button type="button" class="btn btn-primary btn-app btn-width" data-dismiss="modal" onClick={() => deleteUser(userId)}>Confirmar</button>
                 </div>
               </div>
             </div>

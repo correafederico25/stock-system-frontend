@@ -1,14 +1,14 @@
 import React from 'react';
 import Layout from '../../Components/Layout/Layout';
 
-function Articles() {
+const ProviderList = () => {
     return (
-        <Layout>
         <div>
+            <Layout>
             <h1><i class="fas fa-exclamation-triangle"></i> En construcción</h1>
+            </Layout>
         </div>
-        </Layout>
     )
 }
 
-export default Articles;
+export default ProviderList;

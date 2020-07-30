@@ -9,18 +9,9 @@ import Spinner from '../../Components/Spinner/Spinner';
 
 const AddUsers = (props) => {
 
-
-  const options = [
-    {
-      label: 'Administrador',
-      value: 'ADMIN_ROLE'
-    },
-    {
-      label: 'Empleado',
-      value: 'USER_ROLE'
-    }
-  ]
-
+  
+  const [repeatPassword, setRepeatPassword] = useState();
+  const [activeSpinner, setActiveSpinner] = useState(false);
   const [dataEmployee, setDataEmployee] = useState({
     name: '',
     lastname: '',
@@ -34,77 +25,96 @@ const AddUsers = (props) => {
     state: "true",
   });
 
-  const [repeatPassword, setRepeatPassword] = useState();
-  const [activeSpinner, setActiveSpinner] = useState(false);
 
+  const options = [
+    {
+      label: 'Administrador',
+      value: 'ADMIN_ROLE'
+    },
+    {
+      label: 'Empleado',
+      value: 'USER_ROLE'
+    }
+  ]
 
   const onRegisterEmployee = (e) => {
 
     e.preventDefault();
-  
+
     setActiveSpinner(true);
 
-    if ( dataEmployee.name === "" || 
-         dataEmployee.lastname === "" ||
-         dataEmployee.dni === "" || 
-         dataEmployee.email === "" || 
-         dataEmployee.address === "" || 
-         dataEmployee.dateOfAdmission === "" || 
-         dataEmployee.phoneNumber === "" || 
-         dataEmployee.password === "" ||
-         dataEmployee.role === "" || 
-         dataEmployee.state === "" ) { 
+    if (dataEmployee.name === "" ||
+      dataEmployee.lastname === "" ||
+      dataEmployee.dni === "" ||
+      dataEmployee.email === "" ||
+      dataEmployee.address === "" ||
+      dataEmployee.dateOfAdmission === "" ||
+      dataEmployee.phoneNumber === "" ||
+      dataEmployee.password === "" ||
+      dataEmployee.role === "" ||
+      dataEmployee.state === "") {
 
-       Swal.fire({
-       icon: 'error',
-       title: '',
-       text: 'Por favor completa todos los datos para continuar',
-     })
-     setActiveSpinner(false);
-     return
-   }
+      Swal.fire({
+        icon: 'error',
+        title: '',
+        text: 'Por favor completa todos los datos para continuar',
+      })
+      setActiveSpinner(false);
+      return
+    }
 
-   if(dataEmployee.password !== repeatPassword ){
-    Swal.fire({
-      icon: 'error',
-      title: '',
-      text: 'Las contraseñas ingresada no coinciden',
-    });
-    setActiveSpinner(false);
-    return
-   }
+    if (dataEmployee.password.length < 8) {
+      Swal.fire({
+        icon: 'error',
+        title: '',
+        text: 'La contraseña debe tener un mínimo de 8 caracteres',
+      });
+      setActiveSpinner(false);
+      return
+    }
+
+
+    if (dataEmployee.password !== repeatPassword) {
+      Swal.fire({
+        icon: 'error',
+        title: '',
+        text: 'Las contraseñas ingresada no coinciden',
+      });
+      setActiveSpinner(false);
+      return
+    }
 
     const hasToken = JSON.parse(localStorage.getItem('hasToken'));
 
-      fetch("http://localhost:4000/auth/singup", {
-        method: 'POST',
-        body: JSON.stringify(dataEmployee),
-        headers: new Headers({
-          'Content-Type': 'application/json',
-          'x-access-token': hasToken
-        }),
-      })
-        .then((resp) => resp.json())
-        .then((resp) => {
-          if(resp.errorCode === 'MA0200'){
-            setActiveSpinner(false);
-            Swal.fire({
-              icon: 'success',
-              title: resp.errorMsg,
-              showConfirmButton: false,
-              timer: 1500
-            });
-            return
-          }
+    fetch("http://localhost:4000/auth/singup", {
+      method: 'POST',
+      body: JSON.stringify(dataEmployee),
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'x-access-token': hasToken
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((resp) => {
+        if (resp.errorCode === 'MA0200') {
           setActiveSpinner(false);
           Swal.fire({
-            icon: 'error',
-            title: '',
-            text: 'Es posible que alguno de los datos ingresados ya existan en el sistema',
-          })
+            icon: 'success',
+            title: resp.errorMsg,
+            showConfirmButton: false,
+            timer: 1500
+          });
           return
-       
+        }
+        setActiveSpinner(false);
+        Swal.fire({
+          icon: 'error',
+          title: '',
+          text: 'Es posible que alguno de los datos ingresados ya existan en el sistema',
         })
+        return
+
+      })
   }
 
   const handleChangeInput = (e) => {
@@ -115,13 +125,13 @@ const AddUsers = (props) => {
   }
 
   const handleChangeRepeatPassword = (e) => {
-         setRepeatPassword(e.target.value);
+    setRepeatPassword(e.target.value);
   }
 
   return (
-    
+
     <Layout>
-      <form onSubmit={ onRegisterEmployee } noValidate>
+      <form onSubmit={onRegisterEmployee} noValidate>
         <TitleDashboard title={'Agregar usuario'} icon={<i className="fas fa-user-plus"></i>} />
         <div className="container-fluid">
           <Card className="d-none d-md-block">
@@ -146,11 +156,14 @@ const AddUsers = (props) => {
               </div>
               <div className="col-md-6">
                 <Input textLabel={"Contraseña"} isSelectInput={false} type={"password"} placeholder={"Ingresá la contraseña"} name={"password"} handleChangeInput={handleChangeInput} />
+                <small id="passwordHelpBlock" class="form-text text-muted">
+                  La contraseña debe tener un mínimo 8 caracteres.
+                </small>
               </div>
               <div className="col-md-6">
                 <div className="form-group mt-2">
-                <label className="text-labels" >Repetir contraseña</label>
-                <input  className="form-control" type="password" placeholder="ingresá nuevamente tu contraseña"  onChange={handleChangeRepeatPassword}/>
+                  <label className="text-labels" >Repetir contraseña</label>
+                  <input className="form-control" type="password" placeholder="ingresá nuevamente tu contraseña" onChange={handleChangeRepeatPassword} />
                 </div>
               </div>
               <div className="col-md-6">
@@ -161,10 +174,10 @@ const AddUsers = (props) => {
               </div>
             </div>
             <div className="d-flex justify-content-center">
-                <Button isBlock={false}>
-                  {'Registrar usuario'}
-                </Button>
-              </div>
+              <Button isBlock={false}>
+                {'Registrar usuario'}
+              </Button>
+            </div>
           </Card>
         </div>
         <Spinner isVisible={activeSpinner} />
