@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Layout from '../../Components/Layout/Layout';
 import TitleDashboard from '../../Components/TitleDashoard/TitleDashboard';
 import Swal from 'sweetalert2';
-import FormatDate from '../../Functions/Functions';
+import {FormatDate} from '../../Functions/Functions';
 import Spinner from '../../Components/Spinner/Spinner';
 
 

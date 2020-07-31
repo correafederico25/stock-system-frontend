@@ -16,7 +16,9 @@ const Dashboard = (props) => {
   
   const [userInformation, setUserinformation] = useState({});
 
-
+  console.log(props.urlFront);
+  console.log(props.urlBack);
+  
   useEffect(() => {
 
     const hasToken = JSON.parse(localStorage.getItem('hasToken'));
