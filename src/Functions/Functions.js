@@ -11,23 +11,25 @@ const FormatDate = (str) => {
   
   
 const urlFrontEnd = () => {
-  if(process.env.NODE_ENV === "production"){
-    var REACT_APP_URL_FRONT="http://66.97.46.226:3001/";
-  }
-  else{
-    var REACT_APP_URL_FRONT="http://localhost:3001/";
-  }
+  // if(process.env.NODE_ENV === "production"){
+  //   var REACT_APP_URL_FRONT="http://66.97.46.226:3001/";
+  // }
+  // else{
+  //   var REACT_APP_URL_FRONT="http://localhost:3001/";
+  // }
+  var REACT_APP_URL_FRONT="http://66.97.46.226:3001/";
   return REACT_APP_URL_FRONT;
 }
 
 
 const urlBackEnd = () => {
-  if(process.env.NODE_ENV === "production"){
-    var REACT_APP_URL_BACK="http://66.97.46.226:4001/";
-  }
-  else{
-    var REACT_APP_URL_BACK="http://localhost:4000/";
-  }
+  // if(process.env.NODE_ENV === "production"){
+  //   var REACT_APP_URL_BACK="http://66.97.46.226:4001/";
+  // }
+  // else{
+  //   var REACT_APP_URL_BACK="http://localhost:4000/";
+  // }
+  var REACT_APP_URL_BACK="http://66.97.46.226:4001/";
   return REACT_APP_URL_BACK;
 }
 
