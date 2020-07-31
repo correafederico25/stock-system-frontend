@@ -53,7 +53,7 @@ const Users = () => {
       }),
     };
 
-    fetch(`http://localhost:4000/users/delete-user/${id}`, requestDelete)
+    fetch(urlBack + 'users/delete-user/${id}', requestDelete)
       .then(res => res.json())
       .then(resp => {
 
