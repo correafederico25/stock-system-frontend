@@ -11,13 +11,13 @@ import AddUsers from '../AddUsers/AddUsers';
 import EditUsers from '../EditUsers/EditUsers';
 import Home from '../Home/Home';
 import ProviderList from '../ProviderList/ProviderList';
+import {urlFrontEnd, urlBackEnd} from '../../Functions/Functions';  
+
 
 const Dashboard = (props) => {
-  
+  var urlFront = urlFrontEnd();
+  var urlBack = urlBackEnd();
   const [userInformation, setUserinformation] = useState({});
-
-  console.log(props.urlFront);
-  console.log(props.urlBack);
 
   useEffect(() => {
 
@@ -31,7 +31,7 @@ const Dashboard = (props) => {
       }),
     };
 
-    fetch(props.urlBack + "auth/user-information", requestInfo)
+    fetch(urlBack + "auth/user-information", requestInfo)
       .then(res => res.json())
       .then(
         (resp) => {
