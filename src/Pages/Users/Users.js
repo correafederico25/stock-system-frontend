@@ -5,10 +5,14 @@ import TitleDashboard from '../../Components/TitleDashoard/TitleDashboard';
 import Swal from 'sweetalert2';
 import {FormatDate} from '../../Functions/Functions';
 import Spinner from '../../Components/Spinner/Spinner';
+import {urlFrontEnd, urlBackEnd} from '../../Functions/Functions';  
+
 
 
 const Users = () => {
 
+  var urlFront = urlFrontEnd();
+  var urlBack = urlBackEnd();
   const [users, setUsers] = useState([]);
   const [userId, setUserId] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -26,7 +30,7 @@ const Users = () => {
       }),
     };
 
-    fetch('http://localhost:4000/users/all', requestAllUsers)
+    fetch(urlBack +'users/all', requestAllUsers)
       .then(res => res.json())
       .then(resp => {
         setUsers(resp)

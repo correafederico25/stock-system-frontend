@@ -6,10 +6,11 @@ import TitleDashboard from '../../Components/TitleDashoard/TitleDashboard';
 import Card from '../../Components/Card/Card';
 import Button from '../../Components/Button/Button';
 import Spinner from '../../Components/Spinner/Spinner';
-
+import {urlFrontEnd, urlBackEnd} from '../../Functions/Functions';  
 
 const AddUsers = (props) => {
-
+  var urlFront = urlFrontEnd();
+  var urlBack = urlBackEnd();
   
   const [repeatPassword, setRepeatPassword] = useState();
   const [activeSpinner, setActiveSpinner] = useState(false);
@@ -87,7 +88,7 @@ const AddUsers = (props) => {
 
     const hasToken = JSON.parse(localStorage.getItem('hasToken'));
 
-    fetch("http://localhost:4000/auth/singup", {
+    fetch( urlBack + "auth/singup", {
       method: 'POST',
       body: JSON.stringify(dataEmployee),
       headers: new Headers({

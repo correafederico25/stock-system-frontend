@@ -3,11 +3,12 @@ import Card from '../../Components/Card/Card';
 import Spinner from '../../Components/Spinner/Spinner';
 import Button from '../../Components/Button/Button';
 import { Link } from 'react-router-dom';
-
+import {urlFrontEnd, urlBackEnd} from '../../Functions/Functions';  
 
 
 const Login = (props) => {
-
+  var urlFront = urlFrontEnd();
+  var urlBack = urlBackEnd();
   const [inputs, setInputs] = useState({
     email: '',
     password: ''
@@ -35,7 +36,7 @@ const Login = (props) => {
       }),
     };
 
-    fetch("http://localhost:4000/auth/singin", requestInfo)
+    fetch(urlBack + "auth/singin", requestInfo)
       .then(res => res.json())
       .then(
         (resp) => {

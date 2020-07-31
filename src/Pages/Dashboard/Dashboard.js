@@ -18,7 +18,7 @@ const Dashboard = (props) => {
 
   console.log(props.urlFront);
   console.log(props.urlBack);
-  
+
   useEffect(() => {
 
     const hasToken = JSON.parse(localStorage.getItem('hasToken'));
@@ -31,7 +31,7 @@ const Dashboard = (props) => {
       }),
     };
 
-    fetch("http://localhost:4000/auth/user-information", requestInfo)
+    fetch(props.urlBack + "auth/user-information", requestInfo)
       .then(res => res.json())
       .then(
         (resp) => {
