@@ -14,7 +14,10 @@ a:hover {
   color: rgba(226, 226, 226, 0.849);
 }
 
-
+.btn:focus, .btn:active:focus, .btn.active:focus{
+  outline:none;
+  box-shadow:none;
+}
 .full-height {
   height: 100vh !important;
 }

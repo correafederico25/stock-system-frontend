@@ -3,7 +3,10 @@ import Card from '../../Components/Card/Card';
 import Spinner from '../../Components/Spinner/Spinner';
 import Button from '../../Components/Button/Button';
 import { Link } from 'react-router-dom';
+import './login.css';
 import {urlFrontEnd, urlBackEnd} from '../../Functions/Functions';  
+import bguno from '../../images/header-bg.png';
+import bgdos from '../../images/team-shape.png';
 
 
 const Login = (props) => {
@@ -62,25 +65,27 @@ const Login = (props) => {
   return (
 
     <>
-      <div className="container-fluid full-height bg-sidebar full-height">
+      <div className="container-fluid full-height bg-login full-height">
         <div className="row justify-content-center align-items-center">
-        <div className="w-100 d-flex justify-content-center px-2 text-center pb-3 pt-5 mt-4">
-            <h3 className=" text-white">Bienvenido/a, inicia sesión para comenzar</h3>
+          <img src={bguno} alt="" className='positionimg'/>
+          <img src={bgdos} alt="" className='positionimg1'/>
+        <div className="w-100 d-flex justify-content-center px-2 text-center pb-3 pt-5">
+            {/* <h3 className=" text-white">Bienvenido/a, inicia sesión para comenzar</h3> */}
           </div>
-          <div className="col-12 col-sm-8 col-md-7 col-lg-5 col-xl-4 mt-3 z-index">
+          <div className="col-12 col-sm-8 col-md-7 col-lg-5 col-xl-3 mt-3 z-index">
             <Card>
-              <form className="text-center py-4 px-4 bg-white" onSubmit={ handleClickLogin } >
-                <p className="h4 mb-4">Iniciar sesión</p>
+              <form className="text-center" onSubmit={ handleClickLogin } >
+                <p className="bienvenido">Bienvenido</p>
                 {errorMsg ? <div class="alert alert-danger" role="alert">
                   Por favor verifique los datos ingresados
               </div> : ''}
                 <div className="icon-position">
                   <i class="fas fa-user"></i>
-                  <input type="email" className="custom-form mb-4" placeholder="E-mail" name="email" onChange={handleChange} />
+                  <input type="email" className="custom-form" placeholder="Email" name="email" onChange={handleChange} />
                 </div>
                 <div className="icon-position">
                   <i class="fas fa-lock"></i>
-                  <input type="password" id="defaultLoginFormPassword" className="custom-form mb-4" placeholder="Contraseña" name="password" onChange={handleChange} />
+                  <input type="password" id="defaultLoginFormPassword" className="custom-form" placeholder="Contraseña" name="password" onChange={handleChange} />
                 </div>
                 <div className="d-flex justify-content-around">
                   <div>
@@ -89,13 +94,15 @@ const Login = (props) => {
                       <label className="custom-control-label" for="defaultLoginFormRemember">Recordar usuario</label>
                     </div>
                   </div>
-                  <div>
-                    <a>¿Olvidaste la clave? {props.title}</a>
-                  </div>
                 </div>
-                <Button isBlock={true} >
-                  { 'Ingresar' }
-                </Button>
+                <div className='buttoningresar'>
+                  <Button isBlock={true} >
+                    { 'INGRESAR' }
+                  </Button>
+                </div>
+                <div>
+                  <a>¿Olvidaste la clave? {props.title}</a>
+                </div>
               </form>
             </Card>
             {(isLoading) && <Spinner isVisible={true} />}
