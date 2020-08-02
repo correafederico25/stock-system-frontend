@@ -6,12 +6,17 @@ import TitleDashboard from '../../Components/TitleDashoard/TitleDashboard';
 import Card from '../../Components/Card/Card';
 import Button from '../../Components/Button/Button';
 import Spinner from '../../Components/Spinner/Spinner';
+import CurrencyInput from '../../Components/CurrencyInput/CurrencyInput';
+
 
 const AddProduct = () => {
+
+
 
   const [activeSpinner, setActiveSpinner] = useState(false);
   const [salePrice, setSalePrice] = useState('');
   const [costPrice, setCostPrice] = useState('');
+  const [separator, setSeparator] = useState(false);
   const [dataEmployee, setDataEmployee] = useState({
     name: '',
     lastname: '',
@@ -23,9 +28,11 @@ const AddProduct = () => {
     password: '',
     role: '',
     state: "true",
+    myInput: ''
+    
   });
 
-  const regExp = /^\d*(\.\d{0,2})?$/;
+  // const regExp = /^\d*(\.\d{0,2})?$/;
 
   const containerTypeOptions = [
     {
@@ -62,57 +69,66 @@ const AddProduct = () => {
   ]
     
 
-  const formatCurrencySalePrice = (e) => {
+  // const formatCurrencySalePrice = (e) => {
 
-    if (e.name === 'salePrice') {
+  //   if (e.name === 'salePrice') {
 
-      if (!regExp.test(e.value) && salePrice.length == 1) {
-        setSalePrice('');
-      }
+  //     if (!regExp.test(e.value) && salePrice.length == 1) {
+  //       setSalePrice('');
+  //     }
 
-      if (regExp.test(e.value)) {
-        setSalePrice(e.value);
-      }
-    }
-  }
+  //     if (regExp.test(e.value)) {
+  //       setSalePrice(e.value);
+  //     }
+  //   }
+  // }
 
 
-  const formatCurrencyCostPrice = (e) => {
+  // const formatCurrencyCostPrice = (e) => {
 
-    if (e.name === 'costPrice') {
+  //   if (e.name === 'costPrice') {
 
-      if (!regExp.test(e.value) && costPrice.length == 1) {
-        setCostPrice('');
-      }
+  //     if (!regExp.test(e.value) && costPrice.length == 1) {
+  //       setCostPrice('');
+  //     }
 
-      if (regExp.test(e.value)) {
-        setCostPrice(e.value);
-      }
-    }
-  }
+  //     if (regExp.test(e.value)) {
+  //       setCostPrice(e.value);
+  //     }
+  //   }
+  // }
 
   const handleChangeInput = (e) => {
 
-    formatCurrencySalePrice(e);
-    formatCurrencyCostPrice(e);
+    // formatCurrencySalePrice(e);
+    // formatCurrencyCostPrice(e);
 
-    if (e.name === 'salePrice') {
+    // if (e.name === 'salePrice') {
 
-      if (!regExp.test(e.value)) {
-      const changeFormat = e.value.slice(0, -1);
-      parseFloat(changeFormat);
-        return
-      }
-    }
+    //   if (!regExp.test(e.value)) {
+    //   const changeFormat = e.value.slice(0, -1);
+    //   parseFloat(changeFormat);
+    //     return
+    //   }
+    // }
 
-    if (e.name === 'costPrice') {
+    // if (e.name === 'costPrice') {
 
-      if (!regExp.test(e.value)) {
+    //   if (!regExp.test(e.value)) {
 
-       const changeFormat = e.value.slice(0, -1);
-       parseFloat(changeFormat);
-        return
-      }
+    //    const changeFormat = e.value.slice(0, -1);
+    //    parseFloat(changeFormat);
+    //     return
+    //   }
+    // }
+
+    if(!e.name){
+      console.log('entraaa')
+      setDataEmployee({
+        ...dataEmployee,
+        [e.target.name]: e.target.value
+      })
+      return
     }
 
     setDataEmployee({
@@ -128,6 +144,14 @@ const AddProduct = () => {
     console.log(dataEmployee)
   }
 
+  const handleBlur = () => {
+    setSeparator(true);
+  }
+
+  const handleFocus = () => {
+    setSeparator(false);
+  }
+
 
   return (
     <Layout>
@@ -140,16 +164,19 @@ const AddProduct = () => {
                 <Input textLabel={"Código de barras"} isSelectInput={false} type={"number"} placeholder={"Ingresá el código de barras del producto"} name={"barCode"} handleChangeInput={handleChangeInput} />
               </div>
               <div className="col-md-6">
-                <Input textLabel={"Nombre del producto"} isSelectInput={false} type={"text"} placeholder={"Ingresá el nombre del producto"} name={"productName"} handleChangeInput={handleChangeInput} />
+               <Input textLabel={"Descripción"} isSelectInput={false} type={"text"} placeholder={"Ingrese una descripción breve"} name={"description"} handleChangeInput={handleChangeInput} />
               </div>
               <div className="col-md-6">
                 <Input textLabel={"Marca"} isSelectInput={false} type={"text"} placeholder={"¿De que marca es el producto?"} name={"brand"} handleChangeInput={handleChangeInput} />
               </div>
               <div className="col-md-6">
-                <Input textLabel={"Precio de venta"} isSelectInput={false} type={'text'} placeholder={"$ 00.00"} name={"salePrice"} value={salePrice} handleChangeInput={handleChangeInput} />
+           
+                {/* <Input id={'currency-mask'} textLabel={"Precio de venta"} isSelectInput={false} type={'text'} placeholder={"$ 00.00"} name={"salePrice"} value={salePrice} handleChangeInput={handleChangeInput} /> */}
               </div>
               <div className="col-md-6">
-                <Input textLabel={"Precio de costo"} isSelectInput={false} type={'text'} placeholder={"$ 00.00"} name={"costPrice"} value={costPrice} handleChangeInput={handleChangeInput} />
+              <label className="text-labels" htmlFor="">Precio</label>
+              <CurrencyInput className="form-control" name="myInput"  onChange={handleChangeInput} onBlur={handleBlur} onFocus={handleFocus} separator={separator ? ',' : ''} />
+                {/* <Input textLabel={"Precio de costo"} isSelectInput={false} type={'text'} placeholder={"$ 00.00"} name={"costPrice"} value={costPrice} handleChangeInput={handleChangeInput} /> */}
               </div>
               <div className="col-md-6">
                 <Input textLabel={"Tipo de contenido"} isSelectInput={true} name={"role"} options={containerTypeOptions} handleChangeInput={handleChangeInput} />
@@ -161,7 +188,7 @@ const AddProduct = () => {
               <Input textLabel={"Unidad de medida"} isSelectInput={true}  name={"unitOfMeasurement"} options={unitOfMeasurement} handleChangeInput={handleChangeInput} />
               </div>
               <div className="col-md-6">
-              <Input textLabel={"Descripcion (Opcional)"} isSelectInput={false} type={"text"} placeholder={"Ingrese una descripción breve"} name={"description"} handleChangeInput={handleChangeInput} />
+              
               </div>
               <div className="col-md-6">
                 <Input textLabel={"Stock"} isSelectInput={false} type={"number"} placeholder={"Ingresá el stock para este producto"} name={"stock"} handleChangeInput={handleChangeInput} />

@@ -62,10 +62,7 @@ const Login = (props) => {
 
     <>
       <div className="container-fluid full-height bg-sidebar full-height">
-        <div className="row justify-content-center align-items-center">
-        <div className="w-100 d-flex justify-content-center px-2 text-center pb-3 pt-5 mt-4">
-            <h3 className=" text-white">Bienvenido/a, inicia sesión para comenzar</h3>
-          </div>
+        <div className="row justify-content-center align-items-center h-100">
           <div className="col-12 col-sm-8 col-md-7 col-lg-5 col-xl-4 mt-3 z-index">
             <Card>
               <form className="text-center py-4 px-4 bg-white" onSubmit={ handleClickLogin } >

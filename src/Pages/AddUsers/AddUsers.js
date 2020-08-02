@@ -133,7 +133,7 @@ const AddUsers = (props) => {
     <Layout>
       <form onSubmit={onRegisterEmployee} noValidate>
         <TitleDashboard title={'Agregar usuario'} icon={<i className="fas fa-user-plus"></i>} />
-        <div className="container-fluid">
+        <div className="container-fluid px-1">
           <Card className="d-none d-md-block">
             <div className="row">
               <div className="col-md-6">
