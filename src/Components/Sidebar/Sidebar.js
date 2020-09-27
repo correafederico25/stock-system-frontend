@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
-const Sidebar = () => {
+const Sidebar = ({hiddenSidebar}) => {
 
   const hidden = "d-none";
   const showDetail = "p-2-rem d-block w-100 text-left";
@@ -33,6 +33,7 @@ const Sidebar = () => {
     }
   }
 
+ 
   return (
     <>
       <nav className="navbar-nav full-height align-items-center text-center">
@@ -109,7 +110,6 @@ const Sidebar = () => {
             <Link className="m-2 d-block b-bottom cursor-pointer" to="/dashboard/add-users">Mis pedidos</Link>
           </div>
         </div>
-
       </nav>
     </>
   )

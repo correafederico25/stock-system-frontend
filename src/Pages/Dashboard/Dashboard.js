@@ -5,17 +5,17 @@ import Navbar from '../../Components/Navbar/Navbar';
 import Products from '../Products/Products';
 import AddProduct from '../AddProduct/AddProduct';
 import EditProducts from '../EditProducts/EditProducts';
-import DeleteProduct from '../DeleteProduct/DeleteProduct';
 import Users from '../Users/Users';
 import AddUsers from '../AddUsers/AddUsers';
 import EditUsers from '../EditUsers/EditUsers';
 import Home from '../Home/Home';
 import ProviderList from '../ProviderList/ProviderList';
+import { urlBackEnd} from '../../Functions/Functions';  
+
 
 const Dashboard = (props) => {
-  
-  const [userInformation, setUserinformation] = useState({});
 
+  const [userInformation, setUserinformation] = useState({});
 
   useEffect(() => {
 
@@ -52,13 +52,15 @@ const Dashboard = (props) => {
     props.history.push("/")
   }
 
+
+
   return (
     <React.Fragment>
       <Router>
         <div className="container-fluid p-0">
           <div className="d-flex">
-            <div className="p-0 bg-sidebar sidebar-size hidden-sidebar">
-            <Sidebar></Sidebar>
+            <div className="p-0 bg-sidebar sidebar-size">
+            <Sidebar />
             </div>
             <div className="w-100 p-0 bg-light">
             <Navbar userInfo={userInformation} logOut={logOut}></Navbar>
@@ -77,9 +79,6 @@ const Dashboard = (props) => {
                       </Route>
                       <Route path="/dashboard/add-product">
                         <AddProduct />
-                      </Route>
-                      <Route path="/dashboard/delete-product">
-                        <DeleteProduct />
                       </Route>
                       <Route path="/dashboard/edit-products">
                         <EditProducts />

@@ -6,9 +6,12 @@ import TitleDashboard from '../../Components/TitleDashoard/TitleDashboard';
 import Card from '../../Components/Card/Card';
 import Button from '../../Components/Button/Button';
 import Spinner from '../../Components/Spinner/Spinner';
+import { options} from '../../Options';
+import { urlBackEnd } from '../../Functions/Functions';  
+import FadeIn from 'react-fade-in';
 
 const AddUsers = (props) => {
-
+  var urlBack = urlBackEnd();
   
   const [repeatPassword, setRepeatPassword] = useState();
   const [activeSpinner, setActiveSpinner] = useState(false);
@@ -25,17 +28,6 @@ const AddUsers = (props) => {
     state: "true",
   });
 
-
-  const options = [
-    {
-      label: 'Administrador',
-      value: 'ADMIN_ROLE'
-    },
-    {
-      label: 'Empleado',
-      value: 'USER_ROLE'
-    }
-  ]
 
   const onRegisterEmployee = (e) => {
 
@@ -69,6 +61,18 @@ const AddUsers = (props) => {
         title: '',
         text: 'La contraseña debe tener un mínimo de 8 caracteres',
       });
+      setDataEmployee({
+          name: '',
+          lastname: '',
+          dni: '',
+          email: '',
+          address: '',
+          dateOfAdmission: '',
+          phoneNumber: '',
+          password: '',
+          role: '',
+          state: "true",
+      })
       setActiveSpinner(false);
       return
     }
@@ -96,7 +100,9 @@ const AddUsers = (props) => {
     })
       .then((resp) => resp.json())
       .then((resp) => {
+      console.log(resp)
         if (resp.errorCode === 'MA0200') {
+          
           setActiveSpinner(false);
           Swal.fire({
             icon: 'success',
@@ -110,7 +116,7 @@ const AddUsers = (props) => {
         Swal.fire({
           icon: 'error',
           title: '',
-          text: 'Es posible que alguno de los datos ingresados ya existan en el sistema',
+          text: 'Por favor verifique los datos ingresados e intente nuevamente',
         })
         return
 
@@ -132,6 +138,7 @@ const AddUsers = (props) => {
 
     <Layout>
       <form onSubmit={onRegisterEmployee} noValidate>
+        <FadeIn>
         <TitleDashboard title={'Agregar usuario'} icon={<i className="fas fa-user-plus"></i>} />
         <div className="container-fluid px-1">
           <Card className="d-none d-md-block">
@@ -180,6 +187,7 @@ const AddUsers = (props) => {
             </div>
           </Card>
         </div>
+        </FadeIn>
         <Spinner isVisible={activeSpinner} />
       </form>
     </Layout>

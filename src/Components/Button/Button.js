@@ -1,11 +1,13 @@
 import React from 'react'
+import './button.css'
 
 
 
 const Button = (props) => {
 
-    const btnBlock = 'btn btn-primary btn-block my-4 btn-app';
-    const normalBtn = 'btn btn-primary my-4 btn-app';
+    const btnBlock = 'btn btn-primary btn-block';
+    const normalBtn = `btn btn-primary ${props.isLg? " " + "btn-lg" : "" }`;
+   
 
 
     return (

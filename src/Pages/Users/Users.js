@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import Layout from '../../Components/Layout/Layout';
 import TitleDashboard from '../../Components/TitleDashoard/TitleDashboard';
 import Swal from 'sweetalert2';
-import FormatDate from '../../Functions/Functions';
+import {FormatDate} from '../../Functions/Functions';
 import Spinner from '../../Components/Spinner/Spinner';
+import FadeIn from 'react-fade-in';
+
 
 
 const Users = () => {
@@ -16,22 +18,26 @@ const Users = () => {
 
   useEffect(() => {
 
-    const hasToken = JSON.parse(localStorage.getItem('hasToken'));
+    const getAllUsers = () => {
 
-    const requestAllUsers = {
-      method: 'GET',
-      headers: new Headers({
-        'Content-Type': 'application/json',
-        'x-access-token': hasToken
-      }),
-    };
+      const hasToken = JSON.parse(localStorage.getItem('hasToken'));
+      const requestAllUsers = {
+        method: 'GET',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          'x-access-token': hasToken
+        }),
+      };
+  
+      fetch('http://localhost:4000/users/all', requestAllUsers)
+        .then(res => res.json())
+        .then(resp => {
+          setUsers(resp);
+        })
+        .catch(error => console.log(error))
+    }
 
-    fetch('http://localhost:4000/users/all', requestAllUsers)
-      .then(res => res.json())
-      .then(resp => {
-        setUsers(resp)
-        console.log(resp)
-      })
+    getAllUsers();
 
   }, []);
 
@@ -109,26 +115,26 @@ const Users = () => {
 
       <Layout>
         <TitleDashboard title={'Usuario registrados'} icon={<i class="fas fa-users"></i>} />
-        <div className="d-flex justify-content-start w-100">
-        </div>
         {allUsers.length > 0 ? <div className="table-responsive  table-hover">
-          <table className="table table-bordered bg-white mt-2 border-style">
+          <FadeIn>
+          <table className="table bg-white mt-2 border-style">
             <thead>
               <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellido</th>
-                <th scope="col">Email</th>
-                <th scope="col">Contacto</th>
-                <th scope="col">Dirección</th>
-                <th scope="col">Rol</th>
-                <th scope="col">Fecha de ingreso</th>
-                <th scope="col">Acciones</th>
+                <th className="border-top-none" scope="col">Nombre</th>
+                <th className="border-top-none" scope="col">Apellico</th>
+                <th className="border-top-none" scope="col">Email</th>
+                <th className="border-top-none" scope="col">Contacto</th>
+                <th className="border-top-none" scope="col">Dirección</th>
+                <th className="border-top-none" scope="col">Rol</th>
+                <th className="border-top-none" scope="col">Fecha de ingreso</th>
+                <th className="border-top-none" scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody>
               {allUsers}
             </tbody>
           </table>
+          </FadeIn>
           <Spinner isVisible={isLoading} />
 
           {/* Modal confirm delete user */}

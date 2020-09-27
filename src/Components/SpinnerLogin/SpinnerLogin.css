@@ -1,0 +1,25 @@
+.lds-dual-ring-login {
+    display: inline-block;
+    width: 90px;
+    height: 90px;
+  }
+  
+  .lds-dual-ring-login:after {
+    content: " ";
+    display: block;
+    width: 80px;
+    height: 80px;
+    margin: 0px;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    border-color: rgb(47 67 97) transparent rgb(47 67 97);
+    animation: lds-dual-ring 0.5s linear infinite;
+    text-align: center;
+    position: fixed;
+    top: 40%;
+    right: 0;
+    left: 47.5%;
+    bottom: 0;
+    
+  }
+  

@@ -1,0 +1,73 @@
+@font-face{
+    font-family: 'Poppins';
+    src: url(../../fonts/poppins/Poppins-Regular.ttf);
+}
+body{
+    font-family: 'Poppins';
+}
+
+.bg-login{
+    background-color: #354052;
+}
+.card-container{
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 30px 30px 30px 30px !important;
+}
+
+.custom-form {
+    display: block;
+    width: 100%;
+    margin-bottom: 38px !important;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    padding-right: 34px;
+    font-size: 16px;
+    padding-left: 0px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff0;
+    background-clip: padding-box;
+    border: 0px solid #ced4da;
+    border-bottom: 1px solid #999999;
+    border-radius: 0rem;
+}
+.bienvenido{
+    display: block;
+    font-family: 'Poppins';
+    font-size: 30px;
+    font-weight: bold;
+    color: #354052;
+    line-height: 1.2;
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+.alert-danger {
+    position: relative;
+    bottom: 20px;
+    color: #b7202e;
+    background-color: #f8d7da00;
+    border-color: #f5c6cb00;
+}
+.fa-user:before {
+    color: #666666;
+}
+.fa-lock:before {
+    color: #666666;
+}
+.positionimg{
+    right: 0;
+    top: 0;
+    position: absolute;
+    height: 80vh;
+}
+.positionimg1{
+    position: absolute;
+    left: 0;
+    height: 80vh;
+    bottom: 0;
+}
+

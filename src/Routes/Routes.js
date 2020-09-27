@@ -7,15 +7,18 @@ import {
     Switch,
     Route,
   } from "react-router-dom";
-  
+import {urlFrontEnd, urlBackEnd} from '../Functions/Functions';  
 
 function Routes() {
+    var urlFront = urlFrontEnd();
+    var urlBack = urlBackEnd();
+
     return (
         <div>
              <Router>
              <Switch>
-                 <Route exact path="/" component={Login} />
-                 <PrivateRoute path="/dashboard" component={Dashboard}/>
+                 <Route exact path="/" component={Login} urlFront={urlFront} urlBack={urlBack}/>
+                 <PrivateRoute path="/dashboard" component={Dashboard}  urlFront={urlFront} urlBack={urlBack}/>
              </Switch>
             </Router>
         </div>
